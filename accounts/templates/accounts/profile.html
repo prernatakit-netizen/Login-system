@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #1f2937;
+            color: white;
+
+            padding: 18px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+
+            padding: 8px 14px;
+
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            background: #374151;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 600px;
+
+            margin: 60px auto;
+
+            padding: 0 20px;
+        }
+
+        /* CARD */
+
+        .profile-card {
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .profile-icon {
+            text-align: center;
+
+            font-size: 60px;
+
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        /* INFO */
+
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+        .value {
+            background: #f8f9fa;
+
+            border: 1px solid #e5e7eb;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            color: #555;
+        }
+
+        /* FORM */
+
+        form p {
+            margin-bottom: 18px;
+        }
+
+        form label {
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        form input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+        }
+
+        form input:focus {
+            outline: none;
+
+            border-color: #2563eb;
+        }
+
+        /* BUTTON */
+
+        .save-button {
+            width: 100%;
+
+            padding: 13px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* CHANGE PASSWORD */
+
+        .password-button {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            background: #6c757d;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+        }
+
+        .password-button:hover {
+            background: #5c636a;
+        }
+
+        /* BACK */
+
+        .back {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+        }
+
+        .errorlist {
+            color: #dc3545;
+
+            padding-left: 20px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .profile-card {
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2>File Manager</h2>
+
+    <div class="nav-links">
+
+        <a href="{% url 'dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div class="container">
+
+    <div class="profile-card">
+
+        <div class="profile-icon">
+            👤
+        </div>
+
+        <h1>
+            My Profile
+        </h1>
+
+
+        <!-- USERNAME -->
+
+        <div class="info">
+
+            <span class="label">
+                Username
+            </span>
+
+            <div class="value">
+                {{ user.username }}
+            </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                Save Changes
+            </button>
+
+        </form>
+
+
+        <!-- PASSWORD -->
+
+        <a
+            href="{% url 'change_password' %}"
+            class="password-button"
+        >
+            🔒 Change Password
+        </a>
+
+
+        <!-- BACK -->
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="back"
+        >
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

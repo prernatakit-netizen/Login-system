@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - File Manager</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-card {
+            width: 450px;
+            max-width: 92%;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            text-align: center;
+
+            font-size: 50px;
+
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+
+            margin: 0 0 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #777;
+
+            margin-bottom: 28px;
+        }
+
+        form p {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+
+            border-color: #2563eb;
+        }
+
+        .helptext {
+            display: block;
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-top: 6px;
+
+            line-height: 1.5;
+        }
+
+        .errorlist {
+            color: #dc3545;
+
+            font-size: 13px;
+
+            margin: 6px 0;
+
+            padding-left: 18px;
+        }
+
+        .register-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            background: #1d4ed8;
+        }
+
+        .links {
+            text-align: center;
+
+            margin-top: 22px;
+        }
+
+        .links a {
+            color: #2563eb;
+
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            border-top: 1px solid #eee;
+
+            margin: 18px 0;
+        }
+
+        @media (max-width: 500px) {
+
+            .register-card {
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="register-card">
+
+    <div class="logo">
+        📁
+    </div>
+
+    <h1>
+        Create Account
+    </h1>
+
+    <p class="subtitle">
+        Create your File Manager account
+    </p>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+
+        <p>
+
+            {{ form.username.errors }}
+
+            <label for="{{ form.username.id_for_label }}">
+                Username
+            </label>
+
+            {{ form.username }}
+
+            {% if form.username.help_text %}
+                <small class="helptext">
+                    {{ form.username.help_text }}
+                </small>
+            {% endif %}
+
+        </p>
+
+
+        <p>
+
+            {{ form.email.errors }}
+
+            <label for="{{ form.email.id_for_label }}">
+                Email
+            </label>
+
+            {{ form.email }}
+
+        </p>
+
+
+        <p>
+
+            {{ form.password1.errors }}
+
+            <label for="{{ form.password1.id_for_label }}">
+                Password
+            </label>
+
+            {{ form.password1 }}
+
+            {% if form.password1.help_text %}
+                <small class="helptext">
+                    {{ form.password1.help_text }}
+                </small>
+            {% endif %}
+
+        </p>
+
+
+        <p>
+
+            {{ form.password2.errors }}
+
+            <label for="{{ form.password2.id_for_label }}">
+                Confirm Password
+            </label>
+
+            {{ form.password2 }}
+
+            {% if form.password2.help_text %}
+                <small class="helptext">
+                    {{ form.password2.help_text }}
+                </small>
+            {% endif %}
+
+        </p>
+
+
+        <button
+            type="submit"
+            class="register-button"
+        >
+            Create Account
+        </button>
+
+    </form>
+
+
+    <div class="links">
+
+        <div class="divider"></div>
+
+        <p>
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
