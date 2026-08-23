@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:18
+    container_name: login_system_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: login_system_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - "5433:5432"
+
+  web:
+    build: .
+    container_name: login_system_web
+    restart: unless-stopped
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
